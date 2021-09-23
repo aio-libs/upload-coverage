@@ -21,7 +21,8 @@ runs:
       id: meta
       run: |
         FILES=$(ls --dired | tr '\n' ' ')
-        echo "::set-output name=files::${FILES# // /,}"
+        FILES2="${FILES% }"
+        echo "::set-output name=files::${FILES2// /,}"
       working-directory: ${{ runner.temp }}/coverage
       shell: bash
     - name: Upload coverage
