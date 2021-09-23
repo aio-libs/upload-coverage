@@ -16,15 +16,17 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: ${{ inputs.artifact }}
-        path: coverage
+        path: ${{ runner.temp }}/coverage
     - name: Collect names
       id: meta
       run: |
-        FILES=$(find coverage -type f -print0 | tr '\0' ' ')
+        FILES=$(ls --dired | tr '\n' ' ')
         echo "::set-output name=files::${FILES# // /,}"
+      workdir: ${{ runner.temp }}/coverage
       shell: bash
     - name: Upload coverage
       uses: codecov/codecov-action@v2.1.0
       with:
         files: ${{ steps.meta.outputs.files }}
+        directory: ${{ runner.temp }}/coverage
         fail_ci_if_error: ${{ inputs.fail_ci_if_error }}
