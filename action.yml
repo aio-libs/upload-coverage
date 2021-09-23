@@ -22,7 +22,7 @@ runs:
       run: |
         FILES=$(ls --dired | tr '\n' ' ')
         echo "::set-output name=files::${FILES# // /,}"
-      working-directory:: ${{ runner.temp }}/coverage
+      working-directory: ${{ runner.temp }}/coverage
       shell: bash
     - name: Upload coverage
       uses: codecov/codecov-action@v2.1.0
