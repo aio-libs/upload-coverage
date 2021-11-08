@@ -1,8 +1,8 @@
-name: 'Upload Image'
-description: 'Uploade Docker image as an artifact'
+name: 'Upload to codecov.io'
+description: 'Uploade python coverage prepared by aio-libs/prepare-coverage action to codecov.io'
 inputs:
   artifact:
-    description: 'The artifact name to store coverage chunk'
+    description: 'The artifact name to load coverage chunks from'
     required: false
     default: 'coverage'
   fail_ci_if_error:
