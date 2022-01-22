@@ -22,9 +22,17 @@ runs:
         pip install coverage
       working-directory: ${{ runner.temp }}/coverage
       shell: bash
+    - name: Collect names
+      id: meta
+      run: |
+        FILES=$(ls -A --dired | tr '\n' ' ')
+        FILES2="${FILES% }"
+        echo "::set-output name=files::${FILES2}"
+      working-directory: ${{ runner.temp }}/coverage
+      shell: bash
     - name: Combine coverage reports
       run: |
-        coverage combine *
+        coverage combine ${{ steps.meta.outputs.files }}
       working-directory: ${{ runner.temp }}/coverage
       shell: bash
     - name: Generate XML coverage report
