@@ -13,9 +13,10 @@ runs:
   using: "composite"
   steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
-        name: ${{ inputs.artifact }}
+        pattern: "${{ inputs.artifact }}-*"
+        merge-multiple: true
         path: ${{ runner.temp }}/coverage
     - name: Install coverage
       run: |
