@@ -9,6 +9,10 @@ inputs:
     description: 'Fail CI if error'
     required: false
     default: true
+  token:
+    description: 'Codecov token'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -31,7 +35,9 @@ runs:
         coverage xml
       shell: bash
     - name: Upload coverage
-      uses: codecov/codecov-action@v2.1.0
+      uses: codecov/codecov-action@v4
       with:
         files: coverage.xml
         fail_ci_if_error: ${{ inputs.fail_ci_if_error }}
+        token: ${{ inputs.token }} # required
+        verbose: true # (default = false)
