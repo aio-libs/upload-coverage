@@ -35,7 +35,7 @@ runs:
         coverage xml
       shell: bash
     - name: Upload coverage
-      uses: codecov/codecov-action@v6
+      uses: codecov/codecov-action@v7
       with:
         files: coverage.xml
         fail_ci_if_error: ${{ inputs.fail_ci_if_error }}
